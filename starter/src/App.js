@@ -10,7 +10,8 @@ function App() {
   const shelvesNames = [
     { key: 'currentlyReading', name: 'Currently Reading' },
     { key: 'wantToRead', name: 'Want to Read' },
-    { key: 'read', name: 'Read' },]
+    { key: 'read', name: 'Read' },
+  ]
 
   useEffect(()=> {
     const getBooks = async () =>{
