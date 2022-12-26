@@ -1,6 +1,8 @@
 import Books from "./Book";
+import "../App.css";
 
-const BookShelf = ({books, shelvesNames, changeShelf}) => {
+
+const BookShelf = ({books, shelvesNames, changeShelf, shelfName}) => {
   
     return <div>
         {shelvesNames.map((shelf) => 
@@ -10,7 +12,7 @@ const BookShelf = ({books, shelvesNames, changeShelf}) => {
             <ol className="books-grid">
               <li>
                 {books.map((book) => (
-                  book.shelf === shelf.key && <Books book={book} changeShelf={changeShelf} shelvesNames={shelvesNames}/>
+                  book.shelf === shelf.key && <Books book={book} changeShelf={changeShelf} shelvesNames={shelvesNames} shelfName={shelfName}/>
                 ))}
               </li>
             </ol>

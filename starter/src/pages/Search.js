@@ -1,24 +1,27 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Books from "../components/Book";
 import * as BooksAPI from "../BooksAPI"
+import "../App.css";
 
-const SearchPage = ({book, changeShelf, shelvesNames}) => {
-    const [searchBooks, setsearchBooks] = useState([]);
 
-  useEffect(()=> {
-    const getSearchBooks = async () =>{
-      const res = await BooksAPI.getAll();
-      setsearchBooks(res);
-    };
-    getSearchBooks();
-  },[])
+const SearchPage = ({ shelvesNames, changeShelf, shelfName }) => {
+  const [searchBooks, setsearchBooks] = useState([]);
   
   const [query, setQuery] = useState("");
 
-  const updateQuery = (query) => {
+  const updateQuery = async (query) => {
     setQuery(query);
+    const res = await BooksAPI.search(query);
+    query === "" ? setsearchBooks([]) : setsearchBooks(res);
   };
+
+  // const [shelfName, setShelf] = useState("")
+
+  // const changeShelf = (book, shelf) => {
+  //   BooksAPI.update(book, shelf);
+  //   setShelf(shelf);
+  // }
 
     return <div className="search-books">
     <div className="search-books-bar">
@@ -37,11 +40,14 @@ const SearchPage = ({book, changeShelf, shelvesNames}) => {
     <div className="search-books-results">
       <ol className="books-grid">
         {
-          searchBooks.map((b)=> 
-          b.title.toLowerCase().includes(query.toLowerCase()) 
-            ? <li><Books book={b} changeShelf={changeShelf} shelvesNames={shelvesNames}/></li>
-            : ""
-          )
+          searchBooks.map ? (
+            query === "" 
+            ? "" 
+            : searchBooks.map(
+              (b)=> 
+              b.title.toLowerCase().replace(/^\s+|\s+$/gm,".").includes(query.toLowerCase().replace(/^\s+|\s+$/gm,"."))
+            ? <li><Books book={b} changeShelf={changeShelf} shelvesNames={shelvesNames} shelfName={shelfName}/></li>
+            : "")) : ""
         }
       </ol>
     </div>

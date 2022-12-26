@@ -1,21 +1,25 @@
-const ShelfSelect = ({book, changeShelf, shelvesNames}) => {
-  
-    const handleShelf = event => {
-        changeShelf(book, event.target.value)
-    }
+import "../App.css";
 
-    return <div className="book-shelf-changer">
-    <select onChange={handleShelf}>
-      <option value="none" disabled>
-        Move to...
+const ShelfSelect = ({book, changeShelf, shelvesNames, shelfName}) => {
+  
+  const handleShelf = event => {
+      changeShelf(book, event.target.value)
+      shelfName = event.target.value;
+      book.shelf = shelfName;
+  }
+
+  return <div className="book-shelf-changer">
+  <select onChange={handleShelf}>
+    <option value="moveTo" disabled>
+      Move to...
+    </option>
+    {shelvesNames.map((shelf) => 
+      <option value={shelf.key} selected={book.shelf===shelf.key && true}>
+          {shelf.name}
       </option>
-      {shelvesNames.map((shelf) => 
-        <option value={shelf.key} selected={book.shelf===shelf.key && true}>
-            {shelf.name}
-        </option>
-      )}
-      <option value="none" selected={book.shelf==="none" && true} >None</option>
-    </select>
-  </div>
+    )}
+    <option value="none" selected={book.shelf==="none" && true} >None</option>
+  </select>
+</div>
 }
 export default ShelfSelect;

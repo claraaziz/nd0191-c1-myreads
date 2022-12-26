@@ -1,6 +1,8 @@
 import ShelfSelect from "./ShelfSelect";
+import "../App.css";
 
-const Books = ({book, changeShelf, shelvesNames}) => {
+
+const Books = ({book, changeShelf, shelvesNames, shelfName}) => {
     return <div>
         <div className="book">
                   <div className="book-top">
@@ -12,7 +14,7 @@ const Books = ({book, changeShelf, shelvesNames}) => {
                         backgroundImage: `url(${book.imageLinks.thumbnail})`,
                       }}
                     ></div>
-                    <ShelfSelect book={book} changeShelf={changeShelf} shelvesNames={shelvesNames}/>
+                    <ShelfSelect book={book} changeShelf={changeShelf} shelvesNames={shelvesNames} shelfName={shelfName}/>
                   </div>
                   <div className="book-title">{book.title}</div>
                   <div className="book-authors">{book.authors}</div>

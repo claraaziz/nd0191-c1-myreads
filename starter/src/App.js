@@ -13,6 +13,8 @@ function App() {
     { key: 'read', name: 'Read' },
   ]
 
+  const [shelfName, setShelf] = useState("")
+
   useEffect(()=> {
     const getBooks = async () =>{
       const res = await BooksAPI.getAll();
@@ -23,12 +25,13 @@ function App() {
   
   const changeShelf = (book, shelf) => {
     BooksAPI.update(book, shelf);
+    setShelf(shelf);
   }
 
   return (
     <Routes>
-      <Route exact path ="/" element={<HomePage books={books} shelvesNames={shelvesNames} changeShelf={changeShelf}/>}/>
-      <Route exact path ="/search" element={<SearchPage books={books} changeShelf={changeShelf} shelvesNames={shelvesNames}/>}/>
+      <Route exact path ="/" element={<HomePage books={books} shelvesNames={shelvesNames} changeShelf={changeShelf} shelfName={shelfName}/>}/>
+      <Route exact path ="/search" element={<SearchPage shelvesNames={shelvesNames} changeShelf={changeShelf} shelfName={shelfName}/>}/>
   </Routes>
   );
 }
