@@ -1,20 +1,20 @@
 import "../App.css";
+import { useState, useEffect } from "react";
 
-const ShelfSelect = ({book, changeShelf, shelvesNames, shelfName}) => {
+const ShelfSelect = ({book, changeShelf, shelvesNames, updatedBooks, books, searchBooks, selectedShelf}) => {
   
   const handleShelf = event => {
-      changeShelf(book, event.target.value)
-      shelfName = event.target.value;
-      book.shelf = shelfName;
+      changeShelf(book, event.target.value, updatedBooks)
+      book.shelf = event.target.value;
   }
 
   return <div className="book-shelf-changer">
-  <select onChange={handleShelf}>
+  <select onChange={handleShelf} defaultValue={selectedShelf}>
     <option value="moveTo" disabled>
       Move to...
     </option>
     {shelvesNames.map((shelf) => 
-      <option value={shelf.key} selected={book.shelf===shelf.key && true}>
+      <option value={shelf.key} key={shelf.key} selected={shelf.key===book.shelf && true}>
           {shelf.name}
       </option>
     )}
