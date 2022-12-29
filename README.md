@@ -1,6 +1,6 @@
 # MyReads Project
 
-Here's my submission of MyReads project. MyReads is a website that helps organizing books onto 3 shelves: Currently reading, Want to read and Read. There' also a search page for searching for more books to read. 
+Here's my submission of MyReads project. MyReads is a website that helps organizing books onto 3 shelves: Currently reading, Want to read and Read. There's also a search page for searching for more books to read. 
 
 ## How to run the project?
 
@@ -83,7 +83,3 @@ search(query);
 ## Important
 
 The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
-
-## Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebook/create-react-app/blob/main/packages/cra-template/template/README.md).
