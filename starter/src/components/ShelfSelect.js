@@ -1,11 +1,11 @@
 import "../App.css";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 
 const ShelfSelect = ({book, changeShelf, shelvesNames, updatedBooks, books, searchBooks, selectedShelf}) => {
   
   const handleShelf = event => {
       changeShelf(book, event.target.value, updatedBooks)
-      book.shelf = event.target.value;
+      book.shelf = selectedShelf;
   }
 
   return <div className="book-shelf-changer">

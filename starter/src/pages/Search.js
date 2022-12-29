@@ -5,7 +5,7 @@ import * as BooksAPI from "../BooksAPI"
 import "../App.css";
 
 
-const SearchPage = ({ shelvesNames, changeShelf, updatedBooks, books}) => {
+const SearchPage = ({ shelvesNames, changeShelf, updatedBooks, books, setBooks}) => {
   const [searchBooks, setsearchBooks] = useState([]);
   
   const [query, setQuery] = useState("");
@@ -14,6 +14,7 @@ const SearchPage = ({ shelvesNames, changeShelf, updatedBooks, books}) => {
     setQuery(query);
     const res = await BooksAPI.search(query);
     query === "" ? setsearchBooks([]) : setsearchBooks(res);
+    
   };
 
   const [selectedShelf, setSelectedShelf] = useState("none");

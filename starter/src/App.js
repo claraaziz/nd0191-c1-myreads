@@ -39,7 +39,7 @@ function App() {
   return (
     <Routes>
       <Route exact path ="/" element={<HomePage books={books} shelvesNames={shelvesNames} changeShelf={changeShelf} updatedBooks={updatedBooks}/>}/>
-      <Route exact path ="/search" element={<SearchPage shelvesNames={shelvesNames} changeShelf={changeShelf} updatedBooks={updatedBooks} books={books}/>}/>
+      <Route exact path ="/search" element={<SearchPage shelvesNames={shelvesNames} changeShelf={changeShelf} updatedBooks={updatedBooks} books={books} setBooks={setBooks}/>}/>
   </Routes>
   );
 }
