@@ -11,7 +11,7 @@ const HomePage = ({books, shelvesNames, changeShelf, updatedBooks}) => {
     </div>
     <div className="list-books-content">
       <div>
-        <BookShelf books={books} shelvesNames={shelvesNames} changeShelf={changeShelf} updatedBooks={updatedBooks} />
+        <BookShelf books={books} shelvesNames={shelvesNames} changeShelf={changeShelf} updatedBooks={updatedBooks}/>
       </div>
     </div>
     <div className="open-search">

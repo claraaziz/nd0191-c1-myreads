@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Books from "../components/Book";
 import * as BooksAPI from "../BooksAPI"
 import "../App.css";
 
 
-const SearchPage = ({ shelvesNames, changeShelf, updatedBooks, books, setBooks}) => {
+const SearchPage = ({ shelvesNames, changeShelf, books}) => {
   const [searchBooks, setsearchBooks] = useState([]);
   
   const [query, setQuery] = useState("");
@@ -13,22 +13,21 @@ const SearchPage = ({ shelvesNames, changeShelf, updatedBooks, books, setBooks})
   const updateQuery = async (query) => {
     setQuery(query);
     const res = await BooksAPI.search(query);
-    query === "" ? setsearchBooks([]) : setsearchBooks(res);
-    
+    if (!res.error) {
+      query === "" ? setsearchBooks([]) : setsearchBooks(res);
+    } else {
+      setsearchBooks([])
+    }
   };
 
-  const [selectedShelf, setSelectedShelf] = useState("none");
-
-  useEffect(() => {
-    const getSelected = () => {
-      books.map((b) => {
-        searchBooks.map((sb) => {
-          b.id === sb.id && setSelectedShelf(b.shelf);
-        })
-      });
-    }
-    getSelected();
-  })
+  const [newUpdatedBooks, setNewUpdatedBooks] = useState(books);
+  const newChangeShelf = (book, shelf, books, newUpdatedBooks) => {
+    const newUpdatedBooksArray = newUpdatedBooks.filter(b=>b.id!==book.id)
+    book.shelf=shelf;
+    newUpdatedBooksArray.push(book)
+    setNewUpdatedBooks(newUpdatedBooksArray)
+    changeShelf(book, shelf, books, newUpdatedBooks);
+  }
 
     return <div className="search-books">
     <div className="search-books-bar">
@@ -53,7 +52,7 @@ const SearchPage = ({ shelvesNames, changeShelf, updatedBooks, books, setBooks})
             : searchBooks.map(
               (b)=> 
               b.title.toLowerCase().replace(/^\s+|\s+$/gm,".").includes(query.toLowerCase().replace(/^\s+|\s+$/gm,"."))
-            ? <li><Books book={b} changeShelf={changeShelf} shelvesNames={shelvesNames} updatedBooks={updatedBooks} books={books} searchBooks={searchBooks} selectedShelf={selectedShelf}/></li>
+            ? <li><Books book={b} changeShelf={newChangeShelf} shelvesNames={shelvesNames} books={books} updatedBooks={newUpdatedBooks}/></li>
             : "")) : ""
         }
       </ol>

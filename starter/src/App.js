@@ -22,24 +22,20 @@ function App() {
     getBooks();
   },[])
 
-  const updatedBooks = Array.from(books);
-  
-  const changeShelf = (book, shelf, updatedBooks) => {
+  const updatedBooks = [];
+
+  const changeShelf = (book, shelf, books, updatedBooks) => {
     BooksAPI.update(book, shelf);
-    const updatedBook = updatedBooks.filter(b => b.id === book.id)
-    const removeBook = (updatedBooks, updatedBook) => {
-      updatedBooks = updatedBooks.filter(b=>b.id!==updatedBook[0].id)
-    }
-    removeBook(updatedBooks, updatedBook);
-    updatedBook.shelf = shelf;
-    updatedBooks.concat(updatedBook);
+    updatedBooks = books.filter(b=>b.id!==book.id)
+    book.shelf = shelf;
+    updatedBooks.push(book);
     setBooks(updatedBooks);
   }
 
   return (
     <Routes>
       <Route exact path ="/" element={<HomePage books={books} shelvesNames={shelvesNames} changeShelf={changeShelf} updatedBooks={updatedBooks}/>}/>
-      <Route exact path ="/search" element={<SearchPage shelvesNames={shelvesNames} changeShelf={changeShelf} updatedBooks={updatedBooks} books={books} setBooks={setBooks}/>}/>
+      <Route exact path ="/search" element={<SearchPage shelvesNames={shelvesNames} changeShelf={changeShelf} books={books}/>}/>
   </Routes>
   );
 }

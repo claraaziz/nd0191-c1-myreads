@@ -2,7 +2,7 @@ import ShelfSelect from "./ShelfSelect";
 import "../App.css";
 
 
-const Books = ({book, changeShelf, shelvesNames, updatedBooks, books, searchBooks, selectedShelf}) => {
+const Books = ({book, changeShelf, shelvesNames, books, updatedBooks}) => {
     return <div>
         <div className="book">
                   <div className="book-top">
@@ -11,10 +11,9 @@ const Books = ({book, changeShelf, shelvesNames, updatedBooks, books, searchBook
                       style={{
                         width: 128,
                         height: 193,
-                        backgroundImage: `url(${book.imageLinks.thumbnail})`,
-                      }}
+                        backgroundImage: book.hasOwnProperty('imageLinks') ? `url(${book.imageLinks.thumbnail})`: '' ,                      }}
                     ></div>
-                    <ShelfSelect book={book} changeShelf={changeShelf} shelvesNames={shelvesNames} updatedBooks={updatedBooks} books={books} searchBooks={searchBooks} selectedShelf={selectedShelf}/>
+                    <ShelfSelect book={book} changeShelf={changeShelf} shelvesNames={shelvesNames} books={books} updatedBooks={updatedBooks}/>
                   </div>
                   <div className="book-title">{book.title}</div>
                   <div className="book-authors">{book.authors}</div>
